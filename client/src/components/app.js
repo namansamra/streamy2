@@ -9,14 +9,14 @@ import CreateStream from "./createStream";
 import SignUp from "./signup";
 import MyStream from "./mystreams";
 import ProtectedRoute from "./protectedroute";
-import FlashMessageList from "./flash/FlashMessageList";
+import FlashMessage from "./flash/FlashMessage";
 
 const App = () => {
   return (
     <div>
       <BrowserRouter>
         <Navbar />
-        <FlashMessageList />
+        <FlashMessage />
         <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
         <ProtectedRoute path="/live" exact component={CreateStream} />

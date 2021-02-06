@@ -5,5 +5,5 @@ import Flashmessages from "./Flashmessages";
 
 export default combineReducers({
   user: User,
-  flashmessages: Flashmessages,
+  flashmessage: Flashmessages,
 });

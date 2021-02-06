@@ -16,7 +16,7 @@ const Login = (props) => {
   }, [props]);
 
   function handleLogin(e) {
-    e.preventDefault();
+    // e.preventDefault();
     // props.auth(email, pass);
 
     e.preventDefault();
@@ -25,14 +25,14 @@ const Login = (props) => {
       .then((user) => {
         props.addFlashMessage({
           type: "success",
-          text: "Loged in successfully",
+          text: "Logged in successfully",
         });
         props.auth(user,email, pass);
       })
       .catch((err) => {
         props.addFlashMessage({
           type: "error",
-          text: "Please check credentials",
+          text: `${err.message}`,
         });
         console.log(err);
       });

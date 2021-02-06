@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { connect } from "react-redux";
 import { signup } from "../actions/auth";
 import fb from "../config/firebase";
 import { Link } from "react-router-dom";
 import { addFlashMessage } from "../actions/flashmessage";
 
-const SignUp = ({ auth, addFlashMessage }) => {
+const SignUp = ({ auth, addFlashMessage,user,history }) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
+
+  useEffect(() => {
+    if (user) history.push("/");
+  }, [user]);
   function handleSignUp(e) {
     e.preventDefault();
     fb.auth()
@@ -16,14 +20,14 @@ const SignUp = ({ auth, addFlashMessage }) => {
       .then((user) => {
         addFlashMessage({
           type: "success",
-          text: "signed up successfully",
+          text: "Signed up successfully",
         });
         auth(user);
       })
       .catch((err) => {
         addFlashMessage({
           type: "error",
-          text: "User already exits or Please check credentials",
+          text: `${err.message}`,
         });
         console.log(err);
       });
@@ -73,7 +77,7 @@ const SignUp = ({ auth, addFlashMessage }) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    user: state.user.user,
   };
 };
 export default connect(mapStateToProps, {
